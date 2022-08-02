@@ -36,17 +36,22 @@ import java.util.List;
 
     @PostMapping("/climbers")
     Climber createClimber(@RequestBody Climber newClimber) {
-       return climberService.create(newClimber);  //crea un climber nou//
+        return climberService.create(newClimber);  //crea un climber nou//
     }
+
     @PutMapping("/climbers/{id}")
     Climber updateClimber(@PathVariable Long id, @RequestBody Climber updatedClimber) {
         return climberService.update(id, updatedClimber);  //modifica un climber nou//
     }
+
     @DeleteMapping("/climbers/{id}")
     boolean deleteClimber(@PathVariable Long id) {
         return climberService.delete(id);  //borra un climber//
+
     }
 
-
-
+    @GetMapping(value = "/climbers", params = "search")
+    List <Climber> getSearch(@RequestParam String search) {
+        return climberService.search(search); // quan posem paraula al imput ens retorni la paraula
+    }
 }

@@ -47,4 +47,9 @@ import java.util.List;
             return true;
         }
 
+        @Override
+        public List<Climber> search(String search) {
+            var searchCollection = this.climberRepository.findByDescriptionOrTitleContaining(search);
+            return searchCollection;
+        }
     }

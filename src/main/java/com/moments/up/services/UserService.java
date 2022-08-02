@@ -4,7 +4,9 @@ import com.moments.up.models.User;
 import com.moments.up.repositories.IUserRepository;
 import org.springframework.stereotype.Service;
 
+
 @Service
+
 public class UserService implements IUserService{
     private IUserRepository userRepository;
 

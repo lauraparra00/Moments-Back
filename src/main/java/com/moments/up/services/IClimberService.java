@@ -18,4 +18,7 @@ public interface IClimberService {
     Climber update(Long id, Climber updatedClimber);
 
     boolean delete(Long id);
+
+    List<Climber> search(String search);
+
 }
