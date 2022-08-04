@@ -9,15 +9,17 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name= "comments")
+
 public class Comment {
 
+    //Atributs
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     private String comment;
 
-
+    //Relacions
     @ManyToOne
     @JoinColumn(name = "climber_id")
     @JsonIgnore
