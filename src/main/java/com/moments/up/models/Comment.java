@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Table(name= "comments")
 public class Comment {
 
+    //Atributs
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -18,6 +19,7 @@ public class Comment {
     private String comment;
 
 
+    //Relacions
     @ManyToOne
     @JoinColumn(name = "climber_id")
     @JsonIgnore
@@ -25,8 +27,6 @@ public class Comment {
 
 
     @ManyToOne
-    @JoinColumn(name = "fotographer_id")
-    private User fotographer;
-
-
+    @JoinColumn(name = "photographer_id")
+    private User photographer;
 }

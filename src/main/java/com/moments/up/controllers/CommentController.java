@@ -2,37 +2,56 @@ package com.moments.up.controllers;
 
 import com.moments.up.dtos.CommentRequestDto;
 import com.moments.up.models.Comment;
-import com.moments.up.repositories.IClimberRepository;
-import com.moments.up.repositories.ICommentRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.moments.up.models.User;
+import com.moments.up.services.IClimberService;
+import com.moments.up.services.ICommentService;
+import com.moments.up.services.IUserService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000/")
 public class CommentController {
-    private ICommentRepository commentRepository;
-    private IClimberRepository climberRepository;
 
-    public CommentController(ICommentRepository commentRepository, IClimberRepository climberRepository) {
-        this.commentRepository = commentRepository;
-        this.climberRepository = climberRepository;
+    //Atributs
+    private ICommentService commentService;
+    private IClimberService climberService;
+    private IUserService userService;
+
+    //Constructor
+    public CommentController(ICommentService commentService, IClimberService climberService, IUserService userService) {
+        this.commentService = commentService;
+        this.climberService = climberService;
+        this.userService = userService;
     }
 
+    //Get all comments
     @GetMapping("/comments")
     List<Comment> getAll() {
-        return this.commentRepository.findAll();
+        return this.commentService.findAll();
     }
+    // GET comments by id
+    @GetMapping("/comments/{id}")
+    Comment getById(@PathVariable Long id) {
+        return this.commentService.getById(id);
+    }
+    // GET comments by moment id
+    @GetMapping("/moments/{id}/comments")
+    List<Comment> getMomentComments(@PathVariable Long id) {
+        return commentService.findAllByClimberId(id);
+    }
+
 
     //commentDto és el que ens arriba de la app
     @PostMapping("/comments")
-    Comment create(@RequestBody CommentRequestDto commentDto) {
-        var newComment = new Comment();
-        newComment.setComment(commentDto.getComment());
-        var climber = this.climberRepository.findById(commentDto.getClimberId()).get();
-        newComment.setClimber(climber);
-        return this.commentRepository.save(newComment);
+    Comment createComment(@RequestBody CommentRequestDto commentDto) {
+        User authUser = getAuthUser(commentDto.getUserId());
+        return commentService.createComment(commentDto, authUser);
     }
+
+    private User getAuthUser(Long id) {
+        return userService.getById(id);
+    }
+
 }

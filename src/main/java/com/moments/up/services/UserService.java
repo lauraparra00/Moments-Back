@@ -4,10 +4,13 @@ import com.moments.up.models.User;
 import com.moments.up.repositories.IUserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
-
 public class UserService implements IUserService{
+
+
     private IUserRepository userRepository;
 
     public UserService(IUserRepository userRepository) {
@@ -16,6 +19,15 @@ public class UserService implements IUserService{
 
     @Override
     public User findById(Long id) {
+        return userRepository.findById(id).get();
+    }
+
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User getById(Long id) {
         return userRepository.findById(id).get();
     }
 }
