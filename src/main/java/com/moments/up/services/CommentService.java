@@ -16,7 +16,6 @@ public class CommentService implements ICommentService {
 
     private ICommentRepository commentRepository;
     private IClimberRepository climberRepository;
-
     private IUserRepository userRepository;
 
     //Constructor

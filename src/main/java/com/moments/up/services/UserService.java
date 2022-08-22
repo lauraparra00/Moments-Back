@@ -18,10 +18,6 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public User findById(Long id) {
-        return userRepository.findById(id).get();
-    }
-
     public List<User> getAll() {
         return userRepository.findAll();
     }
@@ -30,4 +26,5 @@ public class UserService implements IUserService{
     public User getById(Long id) {
         return userRepository.findById(id).get();
     }
+
 }

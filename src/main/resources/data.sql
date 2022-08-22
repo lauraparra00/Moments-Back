@@ -1,9 +1,9 @@
 INSERT
 INTO
   users
-  (user_Name, avatar)
+  (user_name, avatar)
 VALUES
-  ('Laura', 'avatar');
+  ('Laur', 'avatar');
 
 INSERT
 INTO
@@ -54,3 +54,19 @@ INTO
   (comment, climber_id, photographer_id)
 VALUES
   ('Montanya al pais Basc', 2, 1);
+
+
+
+INSERT
+INTO
+  likes
+  (liker_id, climber_id)
+VALUES
+  (1, 1);
+
+  INSERT
+INTO
+  likes
+  (liker_id, climber_id)
+VALUES
+  (1, 5);

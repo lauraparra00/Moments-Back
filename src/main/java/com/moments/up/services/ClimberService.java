@@ -14,6 +14,10 @@ import java.util.List;
         this.climberRepository = climberRepository;
     }
 
+    public Climber getWholeClimber(Long id) {
+        return climberRepository.findById(id).get();
+    }
+
         @Override
         public List<Climber> findAll() {
             return climberRepository.findAll();
