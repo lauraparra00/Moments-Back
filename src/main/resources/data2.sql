@@ -9,7 +9,7 @@ INSERT
 
 INTO
   climber
-  (title, description, url, fotographer_id)
+  (title, description, url, photographer_id)
 VALUES
   ('Llac Puigcerda', 'pepito', 'https://img4.viajar.elperiodico.com/9c/c4/cf/puigcerda-cataluna-1201x846.jpg
 ', 1);
