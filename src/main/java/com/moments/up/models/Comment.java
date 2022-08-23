@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name= "comments")
+
 public class Comment {
 
     //Atributs

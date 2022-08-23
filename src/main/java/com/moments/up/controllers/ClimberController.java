@@ -1,11 +1,11 @@
 package com.moments.up.controllers;
 
 import com.moments.up.models.Climber;
-import com.moments.up.repositories.IClimberRepository;
-import com.moments.up.services.ClimberService;
 import com.moments.up.services.IClimberService;
 import com.moments.up.services.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,14 +23,17 @@ import java.util.List;
         this.userService = userService;
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/climbers")
-    List<Climber> getAll() {
-        return climberService.findAll(); //torna tots els climbers
+    ResponseEntity<List<Climber>> getAll() {
+        return new ResponseEntity<>(this.climberService.findAll(),HttpStatus.OK); //torna tots els climbers
     }
 
     @GetMapping("/climbers/{id}")
-    Climber getById(@PathVariable Long id) {
-        return climberService.findById(id); //ens retorna un climber//
+    ResponseEntity<Climber> getById(@PathVariable Long id) {
+         Climber climber = climberService.findById(id);
+
+        return new ResponseEntity<>(climber, HttpStatus.OK); //ens retorna un climber//
     }
 
 
@@ -55,3 +58,5 @@ import java.util.List;
         return climberService.search(search); // quan posem paraula al imput ens retorni la paraula
     }
 }
+
+

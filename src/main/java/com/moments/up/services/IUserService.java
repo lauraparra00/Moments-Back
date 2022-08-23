@@ -4,6 +4,7 @@ import com.moments.up.models.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public interface IUserService {
 

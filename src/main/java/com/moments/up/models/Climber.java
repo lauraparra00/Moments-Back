@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.Criteria;
+import org.hibernate.annotations.Cascade;
 
 
 import javax.persistence.*;
@@ -20,9 +22,12 @@ import java.util.List;
 @Entity
 @Table (name = "climber")
 @NoArgsConstructor
+
 @AllArgsConstructor
 
+
 public class Climber {
+    //Atributs
     private String title;
     private String description;
     private String url;
@@ -31,6 +36,7 @@ public class Climber {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
 
     //RELACIONS
     @ManyToOne
@@ -48,7 +54,11 @@ public class Climber {
         this.comments.add(comment);
     }
 
+
 //funció que retorna un int que retorna llista de comentaris i afegim @JasonSerialize pque ejecuti contador i pinti el que retorna //
+
+
+
     @JsonSerialize
     public int commentCount() {
         return this.comments.size();
